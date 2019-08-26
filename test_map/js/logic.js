@@ -1,6 +1,6 @@
 
 // URL for county lines plates data
-countyLink = "counties2018.geojson";
+countyLink = "CountiesPlusUnemp2018.geojson";
 centerLoc = [39.82, -98.58];
 
 
@@ -25,18 +25,21 @@ var streetmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.pn
   id: "mapbox.streets",
   accessToken: API_KEY
 });
-console.log("You just added a tile layer to myMap");
 
 // Add a layer for the county boundaries
 var countyLayer = new L.LayerGroup();
+testThings = 4;
+
 
 // Pull in the county geojson file
 d3.json(countyLink, function(countyData){
+
   console.log(countyData);
 
   // Add a layer with the county outlines.
   L.geoJson(countyData,{
     color: "blue",
+    fillColor: getColor(testThings),
     weight: 2
   }).addTo(countyLayer);
 /*
@@ -60,8 +63,8 @@ d3.json(countyLink, function(countyData){
       }
     });
     // Giving each feature a pop-up with information about that specific feature
-    layer.bindPopup("<h1>" + features.properties.STATEFP + features.properties.COUNTYFP +
-     "</h1> <br> <h2>" + features.properties.NAME + "</h2>");
+    layer.bindPopup("<h1>" + features.properties.NAME +', ' + features.properties.StateAbbr +
+     "</h1> <br> <h2>Unemployement Rate: " + features.properties.UnemploymentRate + "</h2>");
   }
 */
 
