@@ -1,17 +1,17 @@
-Quarter,State,GDP Change
-2016:Q1,United States *,1.2
-2016:Q2,United States *,5.1
-2016:Q3,United States *,3.5
-2016:Q4,United States *,3.9
-2017:Q1,United States *,3.9
-2017:Q2,United States *,4.2
-2017:Q3,United States *,4.8
-2017:Q4,United States *,5.1
-2018:Q1,United States *,4.3
-2018:Q2,United States *,7.6
-2018:Q3,United States *,4.9
-2018:Q4,United States *,4.1
-2019:Q1,United States *,3.8
+Quarter,State,GDP_Change
+2016:Q1,United States,1.2
+2016:Q2,United States,5.1
+2016:Q3,United States,3.5
+2016:Q4,United States,3.9
+2017:Q1,United States,3.9
+2017:Q2,United States,4.2
+2017:Q3,United States,4.8
+2017:Q4,United States,5.1
+2018:Q1,United States,4.3
+2018:Q2,United States,7.6
+2018:Q3,United States,4.9
+2018:Q4,United States,4.1
+2019:Q1,United States,3.8
 2016:Q1,Alabama,-1.0
 2016:Q2,Alabama,5.4
 2016:Q3,Alabama,0.3
