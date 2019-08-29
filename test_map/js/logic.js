@@ -1,12 +1,21 @@
 
-// URL for county lines plates data
-countyLink = "CountiesPlusUnemp2018.geojson";
+// URL for county lines data
+countyLink2018 = "CountiesPlusUnemp2018.geojson";
+countyLink2017 = "CountiesPlusUnemp2017.geojson";
+countyLink2016 = "CountiesPlusUnemp2016.geojson";
+countyLink2015 = "CountiesPlusUnemp2015.geojson";
+countyLink2014 = "CountiesPlusUnemp2014.geojson";
+countyLink2013 = "CountiesPlusUnemp2013.geojson";
+
+// URL for state lines
+stateLink = "gz_2010_us_040_00_500k.json";
+
+// Center of the map we will create (middle of continental US)
 centerLoc = [39.82, -98.58];
 
 
 // Function that will determine the color of a county based on its unemployment rate
 function getColor(d) {
-  //console.log(d);
   return d > 10  ? '#800026' :
          d > 8   ? '#bd0026' :
          d > 6   ? '#e31a1c' :
@@ -15,10 +24,10 @@ function getColor(d) {
          d > 3   ? '#feb24c' :
          d > 2   ? '#fed976' :
          d > 1   ? '#ffeda0' :
-          '#ffffcc' 
+         d > 0   ? '#ffffcc' :
+         '#gray' 
 }
 function getColor2(d) {
-  //console.log(d);
   return d > 10  ? '#543005' :
          d > 8   ? '#8c510a' :
          d > 8   ? '#bf812d' :
@@ -28,11 +37,11 @@ function getColor2(d) {
          d > 3   ? '#80cdc1' :
          d > 2   ? '#35978f' :
          d > 1   ? '#01665e' :
-          '#003c30' 
+         d > 0   ? '#003c30' :
+         "#gray"
 }
 
 function getColor3(d) {
-  //console.log(d);
   return d > 10  ? '#a50026' :
          d > 8   ? '#d73027' :
          d > 8   ? '#f46d43' :
@@ -42,15 +51,11 @@ function getColor3(d) {
          d > 3   ? '#a6d96a' :
          d > 2   ? '#66bd63' :
          d > 1   ? '#1a9850' :
-          '#006837' 
+         d > 0   ? '#006837' :
+         "#lightgray"
 }
 
-var colorScale = d3.scaleLinear()
-    .domain([0, 20])
-    .range(["#ffffcc", "darkred"]);
-
-
-// Adding tile layer
+// Create basic US map
 var usmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
   attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
   maxZoom: 18,
@@ -58,76 +63,115 @@ var usmap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?ac
   accessToken: API_KEY
 });
 
-// Add a layer for the county boundaries
-var countyLayer = new L.LayerGroup();
-
+// Add a layer for state outlines
+var stateLayer = new L.LayerGroup();
 var geoJson;
 
-// Pull in the county geojson file
-d3.json(countyLink, function(countyData){
+// Pull in the state geojson file
+d3.json(stateLink, function(stateData){
 
-  console.log(countyData);
+    feature = stateData.features;
+    //console.log(feature);
 
-  feature = countyData.features;
-  console.log(feature);
+    // Add a layer with the county outlines.
+    geoJson = L.geoJson(stateData,{
 
-  // Add a layer with the county outlines.
-  geoJson = L.geoJson(countyData,{
-    
+      // Style for each feature (in this case a neighborhood)
+      style: function(feature) {
+        return {
+          color: "black",
+          fillOpacity : 0,
+          weight: 2
+          }
+      },
 
-    // Style for each feature (in this case a neighborhood)
-    style: function(feature) {
-      return {
-        color: "white",
-        // Call the chooseColor function to decide which color to color each county (color based on unemployment rate)
-        fillColor: getColor3(feature.properties.UnemploymentRate),
-        fillOpacity: 0.75,
-        weight: 1
-        }
-    },
-
-    // Called on each feature
-    onEachFeature: function(feature, layer) {
-
-      // Setting various mouse events to change style when different events occur
-      layer.on({
-        // On mouse over, make the feature (neighborhood) more visible
-        mouseover: function(event) {
-          layer = event.target;
-          layer.setStyle({
-            fillOpacity: 0.9
-          });
-        },
-        // Set the features style back to the way it was
-        mouseout: function(event) {
-          geoJson.resetStyle(event.target);
-        }
-      });
-      // Giving each feature a pop-up with information about that specific feature
-      layer.bindPopup("<h1>" + feature.properties.NAME +', ' + feature.properties.StateAbbr +
-      "</h1> <br> <h2>Unemployement Rate: " + feature.properties.UnemploymentRate + "</h2>");
-    
-      layer.setStyle({
-        fillColor: getColor3(feature.properties.UnemploymentRate)
-      });
-
-    }
-  }).addTo(countyLayer);
-
+    }).addTo(stateLayer);
 });
 
 
-// Create a baseMaps object to hold the lightmap layer
+// Add a layer for the county boundaries
+var countyLayer2018 = new L.LayerGroup();
+var countyLayer2017 = new L.LayerGroup();
+var countyLayer2016 = new L.LayerGroup();
+var countyLayer2015 = new L.LayerGroup();
+var countyLayer2014 = new L.LayerGroup();
+var countyLayer2013 = new L.LayerGroup();
+
+
+function yearLayers(year,countyLink,countyLayer){
+  
+  // Pull in the county geojson file
+  d3.json(countyLink, function(countyData){
+
+    feature = countyData.features;
+    //console.log(feature);
+
+    // Add a layer with the county outlines.
+    geoJson = L.geoJson(countyData,{
+
+      // Style for each feature (in this case a neighborhood)
+      style: function(feature) {
+        return {
+          color: "white",
+          // Call the chooseColor function to decide which color to color each county (color based on unemployment rate)
+          fillColor: getColor3(feature.properties.UnemploymentRate),
+           fillOpacity: 0.75,
+          weight: 1
+          }
+      },
+
+      // Called on each feature
+      onEachFeature: function(feature, layer) {
+
+        // Setting various mouse events to change style when different events occur
+        layer.on({
+          // On mouse over, make the feature (neighborhood) more visible
+          mouseover: function(event) {
+            layer = event.target;
+            layer.setStyle({
+              fillOpacity: 0.9
+            });
+          },
+          // Set the features style back to the way it was
+          mouseout: function(event) {
+            geoJson.resetStyle(event.target);
+          }
+        });
+        // Giving each feature a pop-up with information about that specific feature
+        layer.bindPopup("<h3>" + feature.properties.NAME +', ' + feature.properties.StateAbbr + ` ${year}` +
+                        "</h3><p>Workforce Size: " + parseInt(feature.properties.LaborForce).toLocaleString() + 
+                        "<br>Number Empolyed: " + parseInt(feature.properties.Employed).toLocaleString() + 
+                        "<br>Number Unempolyed: " + parseInt(feature.properties.Unemployed).toLocaleString() + 
+                        "<br>Unemployement Rate: " + feature.properties.UnemploymentRate + "</p>");
+    
+      }
+    }).addTo(countyLayer);
+
+  });
+
+}
+
+yearLayers(2018,countyLink2018,countyLayer2018);
+yearLayers(2017,countyLink2017,countyLayer2017);
+yearLayers(2016,countyLink2016,countyLayer2016);
+yearLayers(2015,countyLink2015,countyLayer2015);
+yearLayers(2014,countyLink2014,countyLayer2014);
+yearLayers(2013,countyLink2013,countyLayer2013);
+
+// Create an overlayMaps object to hold the earthquakes layer
 var baseMaps = {
-  "US"    : usmap
+  "Unemployment 2018"    : countyLayer2018,
+  "Unemployment 2017"    : countyLayer2017,
+  "Unemployment 2016"    : countyLayer2016,
+  "Unemployment 2015"    : countyLayer2015,
+  "Unemployment 2014"    : countyLayer2014,
+  "Unemployment 2013"    : countyLayer2013
 };
 
 // Create an overlayMaps object to hold the earthquakes layer
 var overlayMaps = {
-  "Counties": countyLayer
+  "State Borders"    : stateLayer
 };
-
-
 // Create the map object with options
 var myMap = L.map("map", {
   center: centerLoc,
@@ -139,4 +183,3 @@ var myMap = L.map("map", {
 L.control.layers(baseMaps, overlayMaps, {
   collapsed: false
 }).addTo(myMap);
-
