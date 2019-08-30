@@ -15,6 +15,8 @@ var margin = {
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
+var yearDropdown = d3.select("#year");
+
 // Create an SVG wrapper, append an SVG group that will hold our chart,
 // and shift the latter by left and top margins.
 var chart = d3
@@ -61,7 +63,7 @@ function renderAxesX(newXScale, xAxis) {
     var bottomAxis = d3.axisBottom(newXScale);
 
     xAxis.transition()
-      .duration(1000) 
+      .duration(1000) //100000?
       .call(bottomAxis);
 
     return xAxis;
@@ -109,7 +111,7 @@ function styleX(value, chosenXAxis) {
     }
     // household income in dollars
     else if (chosenXAxis === 'householdincome') {
-        //console.log(value)
+        console.log(value)
         return `$${value}`;
         //return 0
     }
@@ -197,13 +199,9 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
     return circlesGroup;
 }
-
-// Retrieve data from the CSV file and execute everything below
-var year = d3.select("year").on('change', onchange) // problem line
-function onchange() {
-    var yearValue = d3.select("year").property("value");
-    console.log(yearValue)
-    d3.csv(yearValue).then(function(censusData) { //"/data/census_data2017_state.csv")
+function updateChart(yearFile) {
+    // Retrieve data from the CSV file and execute everything below
+    d3.csv(yearFile).then(function(censusData) { //err,
         // census_data2013-2017_state.csv available
         //if (err) throw err;
         console.log(censusData)
@@ -458,3 +456,10 @@ function onchange() {
         console.log(err);
     });
 }
+
+yearDropdown.on('change', function() {
+    console.log(yearDropdown.node().value);
+    d3.selectAll("g > *").remove();
+    updateChart(yearDropdown.node().value);
+});
+updateChart("../assets/data/census_data2017_state.csv");
