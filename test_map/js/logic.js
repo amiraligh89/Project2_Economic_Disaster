@@ -81,7 +81,7 @@ d3.json(stateLink, function(stateData){
         return {
           color: "black",
           fillOpacity : 0,
-          weight: 2
+          weight: 1
           }
       },
 
