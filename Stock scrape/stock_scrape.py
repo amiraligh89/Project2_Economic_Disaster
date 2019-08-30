@@ -48,7 +48,7 @@ def scrape_stocks():
     # Return results
     return stock_info
 
-
+scrape_stocks()
 
     # # Selecting the the targeted elements
     # print(long_names[0].text, shares_traded[0].text, changes[0].text)
