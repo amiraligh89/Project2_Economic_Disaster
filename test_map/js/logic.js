@@ -161,24 +161,26 @@ yearLayers(2013,countyLink2013,countyLayer2013);
 
 // Create an overlayMaps object to hold the earthquakes layer
 var baseMaps = {
-  "Unemployment 2018"    : countyLayer2018,
-  "Unemployment 2017"    : countyLayer2017,
-  "Unemployment 2016"    : countyLayer2016,
-  "Unemployment 2015"    : countyLayer2015,
+  "Unemployment 2013"    : countyLayer2013,
   "Unemployment 2014"    : countyLayer2014,
-  "Unemployment 2013"    : countyLayer2013
+  "Unemployment 2015"    : countyLayer2015,
+  "Unemployment 2016"    : countyLayer2016,
+  "Unemployment 2017"    : countyLayer2017,
+  "Unemployment 2018"    : countyLayer2018
 };
 
 // Create an overlayMaps object to hold the earthquakes layer
 var overlayMaps = {
   "State Borders"    : stateLayer
 };
+ 
 // Create the map object with options
 var myMap = L.map("map", {
   center: centerLoc,
   zoom: 4,
-  layers: [usmap]
+  layers: [usmap,countyLayer2013]
 });
+
 
 // Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
 L.control.layers(baseMaps, overlayMaps, {
@@ -203,7 +205,48 @@ legend.onAdd = function (myMap) {
   
   return div;
 };
-  
 legend.addTo(myMap);
 
+var layers = [countyLayer2013,countyLayer2014,countyLayer2015,countyLayer2016,countyLayer2017,countyLayer2018];
 
+function switchYear( {value} ){
+  
+  layerPlace = parseInt(value)-1;
+  newTopLayer(layerPlace);
+}
+
+// define addLayer function
+function newTopLayer(layerNumber) {
+ 
+  for (var i = 0; i < layers.length; i++) {
+    myMap.removeLayer(layers[i]);
+  };
+  myMap.addLayer(layers[layerNumber]);
+  
+}
+
+// and the length of said array so that the timer will stop
+var arrayLength = layers.length;
+
+// set the counter for the timer
+var i = 0;                     
+
+// set the timer delay function to add layers to map, calling function name in HTML button
+function gogogo () {           
+   setTimeout(function () {    
+      newTopLayer(i); // adding one layer at a time from the array
+      i++;                     
+      if (i < arrayLength) {            
+         gogogo();             
+      }    
+   }, 1500); // delay between layer adds in milliseconds
+}
+gogogo();
+
+
+L.control.timelineSlider({
+  timelineItems: ["2013", "2014", "2015", "2016", "2017", "2018"],
+  extraChangeMapParams: {greeting: "Slide to see change in unemployment over time"}, 
+  changeMap: switchYear,
+  position: 'bottomleft' })
+.addTo(myMap);
