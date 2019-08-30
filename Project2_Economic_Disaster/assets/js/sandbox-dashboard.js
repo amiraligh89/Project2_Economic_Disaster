@@ -2,16 +2,16 @@
 // set svg and chart dimensions
 function scatterPlot() {
     var svgWidth = document.getElementById('scatter').clientWidth;
-    var svgHeight = document.getElementById('scatter').clientHeight;
+    var svgHeight = document.getElementById('scatter').clientHeight+200;
 
     console.log(svgWidth);
     console.log(svgHeight);
     // set borders in svg
     var margin = {
         top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0
+        right: 40,
+        bottom: 70,
+        left: 70
     };
 
     // calculate chart height and width
@@ -321,7 +321,7 @@ function scatterPlot() {
                     .classed('aText', true)
                     .classed('active', true)
                     .attr('x', 0)
-                    .attr('y', 0 - 25)
+                    .attr('y', 0 - 40)
                     .attr('dy', '1em')
                     .attr('transform', 'rotate(-90)')
                     .attr('value', 'highschool')
@@ -354,7 +354,7 @@ function scatterPlot() {
                 //     .classed('aText', true)
                 //     .classed('inactive', true)
                 //     .attr('x', 0)
-                //     .attr('y', 0 - 100)
+                //     .attr('y', 0 - 25)
                 //     .attr('dy', '1em')
                 //     .attr('transform', 'rotate(-90)')
                 //     .attr('value', 'mortgage')
