@@ -16,7 +16,7 @@ centerLoc = [39.82, -98.58];
 
 // Function that will determine the color of a county based on its unemployment rate
 function getColor(d) {
-  return d > 10  ? '#800026' :
+  return d > 9  ? '#800026' :
          d > 8   ? '#bd0026' :
          d > 6   ? '#e31a1c' :
          d > 5   ? '#fc4e2a' :
@@ -28,9 +28,9 @@ function getColor(d) {
          '#gray' 
 }
 function getColor2(d) {
-  return d > 10  ? '#543005' :
+  return d > 9  ? '#543005' :
          d > 8   ? '#8c510a' :
-         d > 8   ? '#bf812d' :
+         d > 7   ? '#bf812d' :
          d > 6   ? '#dfc27d' :
          d > 5   ? '#f6e8c3' :
          d > 4   ? '#c7eae5' :
@@ -42,9 +42,9 @@ function getColor2(d) {
 }
 
 function getColor3(d) {
-  return d > 10  ? '#a50026' :
+  return d > 9  ? '#a50026' :
          d > 8   ? '#d73027' :
-         d > 8   ? '#f46d43' :
+         d > 7   ? '#f46d43' :
          d > 6   ? '#fdae61' :
          d > 5   ? '#fee08b' :
          d > 4   ? '#d9ef8b' :
@@ -87,6 +87,7 @@ d3.json(stateLink, function(stateData){
 
     }).addTo(stateLayer);
 });
+
 
 
 // Add a layer for the county boundaries
@@ -183,3 +184,26 @@ var myMap = L.map("map", {
 L.control.layers(baseMaps, overlayMaps, {
   collapsed: false
 }).addTo(myMap);
+
+// Create a legent and add it to the map
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (myMap) {
+  
+  var div = L.DomUtil.create('div', 'info legend'),
+    grades = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    labels = ['1','2','3','4','5', '6', '7', '8', '9+'];
+  
+  // loop through our density intervals and generate a label with a colored square for each interval
+  for (var i = 0; i < grades.length; i++) {
+    div.innerHTML +=
+      '<i style="background:' + getColor3(grades[i] + 1) + '"></i> ' +
+      grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+  }
+  
+  return div;
+};
+  
+legend.addTo(myMap);
+
+
