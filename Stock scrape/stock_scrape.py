@@ -17,7 +17,7 @@ def init_browser():
     return Browser('chrome', **executable_path, headless=False)
 
 # Create a dictionary to store all scraped data
-fed_info = {}
+stock_info = {}
 
 # Scraping function that exectutes the scraping of targeted webpages
 def scrape_stocks():
@@ -37,11 +37,24 @@ def scrape_stocks():
     shares_traded = soup.find_all('span', class_ = "Z90tFb")
     changes = soup.find_all('span', class_ = "hO8Bcf")
 
-    # Selecting the the targeted elements
-    print(long_names[0].text, shares_traded[0].text, changes[0].text)
-    print(long_names[1].text, shares_traded[1].text, changes[1].text)
-    print(long_names[5].text, shares_traded[5].text, changes[5].text)
-    print(long_names[6].text, shares_traded[6].text, changes[6].text)
+    # Store data in stock_scraped_dict
+    stock_info['dow'] = f'{long_names[0].text} {shares_traded[0].text} {changes[0].text}'
+    stock_info['s&p'] = f'{long_names[1].text} {shares_traded[1].text} {changes[1].text}'
+    stock_info['nasdaq'] = f'{long_names[5].text} {shares_traded[5].text} {changes[5].text}'
+    stock_info['russell'] = f'{long_names[6].text} {shares_traded[6].text} {changes[6].text}'
+
+    print(stock_info['dow'])
+    
+    # Return results
+    return stock_info
+
+scrape_stocks()
+
+    # # Selecting the the targeted elements
+    # print(long_names[0].text, shares_traded[0].text, changes[0].text)
+    # print(long_names[1].text, shares_traded[1].text, changes[1].text)
+    # print(long_names[5].text, shares_traded[5].text, changes[5].text)
+    # print(long_names[6].text, shares_traded[6].text, changes[6].text)
     
     # how to store in list?
 
