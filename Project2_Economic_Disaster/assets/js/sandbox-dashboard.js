@@ -361,7 +361,7 @@ function scatterPlot() {
                 //     .text('Monthly Cost of Homeownership ($)');
 
                 // updateToolTip function above csv import
-                // var circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
+                var circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
 
                 // x axis labels event listener
                 xLabelsGroup.selectAll('text').on('click', function() {
