@@ -151,7 +151,6 @@ function yearLayers(year,countyLink,countyLayer){
   });
 
 }
-
 yearLayers(2018,countyLink2018,countyLayer2018);
 yearLayers(2017,countyLink2017,countyLayer2017);
 yearLayers(2016,countyLink2016,countyLayer2016);
@@ -234,12 +233,15 @@ var i = 0;
 // set the timer delay function to add layers to map, calling function name in HTML button
 function gogogo () {           
    setTimeout(function () {    
-      newTopLayer(i); // adding one layer at a time from the array
+
+      // Set the slider to each year in order. It will cause the slider function to execute and move through the years.
+      var ranges=document.getElementsByClassName('range-labels')[0].getElementsByTagName("li");
+      ranges[i].click();
       i++;                     
       if (i < arrayLength) {            
          gogogo();             
       }    
-   }, 1500); // delay between layer adds in milliseconds
+   }, 2000); // delay between layer adds in milliseconds
 }
 gogogo();
 
