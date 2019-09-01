@@ -243,7 +243,7 @@ function gogogo () {
       if (i < arrayLength) {            
          gogogo();             
       }    
-   }, 1500); // delay between layer adds in milliseconds
+   }, 2000); // delay between layer adds in milliseconds
 }
 gogogo();
 

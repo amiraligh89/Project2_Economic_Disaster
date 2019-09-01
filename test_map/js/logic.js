@@ -237,6 +237,7 @@ function gogogo () {
       // Set the slider to each year in order. It will cause the slider function to execute and move through the years.
       var ranges=document.getElementsByClassName('range-labels')[0].getElementsByTagName("li");
       ranges[i].click();
+      
       i++;                     
       if (i < arrayLength) {            
          gogogo();             
