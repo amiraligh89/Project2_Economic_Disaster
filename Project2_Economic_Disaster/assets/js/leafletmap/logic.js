@@ -68,7 +68,7 @@ var stateLayer = new L.LayerGroup();
 var geoJson;
 
 // Pull in the state geojson file
-d3.json(stateLink, function(stateData){
+d3.json(stateLink).then(function(stateData){
 
     feature = stateData.features;
     //console.log(feature);
@@ -102,7 +102,7 @@ var countyLayer2013 = new L.LayerGroup();
 function yearLayers(year,countyLink,countyLayer){
   
   // Pull in the county geojson file
-  d3.json(countyLink, function(countyData){
+  d3.json(countyLink).then(function(countyData){
 
     feature = countyData.features;
     //console.log(feature);
