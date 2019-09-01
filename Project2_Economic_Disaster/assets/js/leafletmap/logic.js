@@ -177,7 +177,7 @@ var overlayMaps = {
 // Create the map object with options
 var myMap = L.map("map", {
   center: centerLoc,
-  zoom: 4,
+  zoom: 1,
   layers: [usmap,countyLayer2013]
 });
 
