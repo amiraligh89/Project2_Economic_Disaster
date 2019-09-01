@@ -177,7 +177,7 @@ var overlayMaps = {
 // Create the map object with options
 var myMap = L.map("map", {
   center: centerLoc,
-  zoom: 1,
+  zoom: 4,
   layers: [usmap,countyLayer2013]
 });
 
@@ -246,7 +246,7 @@ function gogogo () {
    }, 2000); // delay between layer adds in milliseconds
 }
 gogogo();
-
+newTopLayer(0);
 
 L.control.timelineSlider({
   timelineItems: ["2013", "2014", "2015", "2016", "2017", "2018"],
