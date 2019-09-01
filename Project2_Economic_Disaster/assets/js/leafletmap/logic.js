@@ -234,7 +234,11 @@ var i = 0;
 // set the timer delay function to add layers to map, calling function name in HTML button
 function gogogo () {           
    setTimeout(function () {    
-      newTopLayer(i); // adding one layer at a time from the array
+
+      // Set the slider to each year in order. It will cause the slider function to execute and move through the years.
+      var ranges=document.getElementsByClassName('range-labels')[0].getElementsByTagName("li");
+      ranges[i].click();
+      
       i++;                     
       if (i < arrayLength) {            
          gogogo();             
