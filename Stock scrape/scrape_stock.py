@@ -38,24 +38,24 @@ def scrape_stock():
     changes = soup.find_all('span', class_ = "hO8Bcf")
 
     # Store data in stock_info dict{}
-    stock_info['dow'] = f'{long_names[0].text}  volume: {shares_traded[0].text}  change: {changes[0].text}'
-    stock_info['s&p'] = f'{long_names[1].text}  volume: {shares_traded[1].text}  change: {changes[1].text}'
-    stock_info['nasdaq'] = f'{long_names[5].text}  volume: {shares_traded[5].text}  change: {changes[5].text}'
-    stock_info['russell'] = f'{long_names[6].text}  volume: {shares_traded[6].text}  change: {changes[6].text}'
+    stock_info['dow'] = f'{long_names[0].text}  trading volume: {shares_traded[0].text},  change: {changes[0].text}'
+    stock_info['snp'] = f'{long_names[1].text}  trading volume: {shares_traded[1].text},  change: {changes[1].text}'
+    stock_info['nasdaq'] = f'{long_names[5].text}  trading volume: {shares_traded[5].text},  change: {changes[5].text}'
+    stock_info['russell'] = f'{long_names[6].text}  trading volume: {shares_traded[6].text},  change: {changes[6].text}'
 
-    print("--------------------------------------------------------------------")
+    print("                                                                    ")
     print(stock_info['dow'])
-    print("--------------------------------------------------------------------")
-    print(stock_info['s&p'])
-    print("--------------------------------------------------------------------")
+    print("                                                                    ")
+    print(stock_info['snp'])
+    print("                                                                    ")
     print(stock_info['nasdaq'])
-    print("--------------------------------------------------------------------")
+    print("                                                                    ")
     print(stock_info['russell'])
-    print("--------------------------------------------------------------------")
+    print("                                                                    ")
 
     # Return results
     return stock_info
 
-scrape_stock()
+#scrape_stock()
 
 

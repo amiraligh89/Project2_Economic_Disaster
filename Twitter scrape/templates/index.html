@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Twitter - Web Scraping</title>
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="mars.css">
+
+  
+</head>
+
+<body>
+      <div class="container-fluid">
+          <div class="jumbotron text-center">
+              <h1><strong>Twitter Search</strong></h1>
+              <p>Extracting Tweets with Hashtags</p>
+              <form action="/scrape">
+                Number of Tweets:<br>
+                <input type="text" name="n" value="">
+                <br>
+                Hashtag:<br>
+                <input type="text" name="search" value="">
+                <br><br>
+                <input type="submit" value="Submit">
+              </form> 
+          </div>
+          <div>
+              <h2>Latest Tweets:</h2>
+              {% for row in data %}
+              <h3> {{row}} </h3>
+              {% endfor %}
+          </div>
+
+      </div><!-- Close main container -->
+</body>
+</html>
