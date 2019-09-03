@@ -30,6 +30,7 @@ def scrape_stock():
     # Creating a beautifulsoup object and parsing this object
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
+    browser.quit() #this will close the browser window after scraping
 
     # Extracting the exchange names, trading volumes, changes
     # tickers = soup.find_all('div', id = "kp-wp-tab-MARKET_SUMMARY")
