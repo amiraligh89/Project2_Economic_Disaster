@@ -65,33 +65,33 @@
             </a>
           </li>
           <li>
+            <a href="./6-economic-indicators.html">
+              <i class="far fa-chart-bar"></i>
+              <p>Economic Indicators</p>
+            </a>
+          </li>
+          <li>
             <a href="./2-unemployment-map.html">
               <i class="far fa-map"></i>
               <p>Unemployment Map</p>
             </a>
           </li>
           <li>
-            <a href="./3-gdp.html">
-              <i class="fas fa-chart-line"></i>
-              <p>Gross Domestic Product</p>
-            </a>
-          </li>
-          <li>
-            <a href="./4-twitter.html">
-              <i class="fab fa-twitter-square"></i>
-              <p>Twitter Feed</p>
-            </a>
-          </li>
-          <li>
-            <a href="./5-stock-index.html">
+            <a href="#stock">
               <i class="fas fa-chart-line"></i>
               <p>Stock Index</p>
             </a>
           </li>
           <li>
-            <a href="./6-economic-indicators.html">
-              <i class="far fa-chart-bar"></i>
-              <p>Economic Indicators</p>
+            <a href="#twitter">
+              <i class="fab fa-twitter-square"></i>
+              <p>Twitter Feed</p>
+            </a>
+          </li>
+          <li>
+            <a href="./3-gdp.html">
+              <i class="fas fa-chart-line"></i>
+              <p>Gross Domestic Product</p>
             </a>
           </li>
         </ul>
@@ -109,7 +109,6 @@
                 <span class="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a class="navbar-brand" href="#pablo">Dashboard</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
             aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -139,11 +138,11 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="./1-dashboard.html">Dashboard</a>
-                  <a class="dropdown-item" href="./2-unemployment-map.html">Unemployment Map</a>
-                  <a class="dropdown-item" href="./3-gdp.html">Gross Domestic Product</a>
-                  <a class="dropdown-item" href="./4-twitter.html">Twitter Feed</a>
-                  <a class="dropdown-item" href="./5-stock-index.html">Stock Index</a>
                   <a class="dropdown-item" href="./6-economic-indicators.html">Economic Indicators</a>
+                  <a class="dropdown-item" href="./2-unemployment-map.html">Unemployment Map</a>
+                  <a class="dropdown-item" href="./1-dashboard.html#stock">Stock Index</a>
+                  <a class="dropdown-item" href="./1-dashboard.html#twitter">Twitter Feed</a>
+                  <a class="dropdown-item" href="./3-gdp.html">Gross Domestic Product</a>
                 </div>
               </li>
             </ul>
@@ -151,15 +150,14 @@
         </div>
       </nav>
       <!-- End Navbar -->
-      <div class="panel-header panel-header-lg" style="height: 100px">
-        <canvas id="bigDashboardChart"></canvas>
+      <div class="panel-header panel-header-sm" style="height: 100px">
       </div>
       <div class="content">
         <div class="row">
-          <div class="col-lg-6 col-md-12 mb-5" style="height: 527px">
+          <div class="col-lg-6 col-md-12 mb-5" style="height: 514px">
             <div class="card card-chart flex-column h-100">
               <div class="card-header">
-                <h3 class="card-title" style="text-align:center;">Poverty Vs. Education</h3>
+                <h3 class="card-title" style="text-align:center;"><strong>Poverty Vs. Education</strong></h3>
                 <h5 class="card-category" style="text-align:center;">(Click on Chart to Learn More)</h5>
               </div>
               <div class="card-body">
@@ -172,7 +170,7 @@
           <div class="col-lg-6 col-md-12">
             <div class="card card-chart">
               <div class="card-header">
-                <h3 class="card-title" style="text-align:center;">Unemployment Map</h3>
+                <h3 class="card-title" style="text-align:center;"><strong>Unemployment Map</strong></h3>
                 <h5 class="card-category" style="text-align:center;">(Click <a href="./2-unemployment-map.html">Here</a>
                   for More Details)</h5>
               </div>
@@ -181,82 +179,97 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-lg-4 col-md-6">
-              <div class="card  card-chart">
-                <div class="card-header text-center">
-                  <h3 class="card-title" style="text-align:center;">Stock Market Tickers</h3>
-                  <a class="btn btn-primary btn-md" href="/scrape" role="button">Get Current Market Update</a>
-                </div>
-                <div class="card-body">
-                  <h3>{{ stock_info.dow }}</h3>
-                  <hr>
-                  <h3>{{ stock_info.snp }}</h3>
-                  <hr>
-                  <h3>{{ stock_info.nasdaq }}</h3>
-                  <hr>
-                  <h3>{{ stock_info.russell }}</h3>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="card ">
+              <div class="card-header text-center">
+                <h3 class="card-title" id="stock" style="text-align:center;"><strong>Stock Market Tickers</strong></h3>
+                <h5 class="card-category" style="text-align:center;">Current Market Update</h5>
+              </div>
+              <div class="card-body">
+                <p>{{ stock_info.dow }}</p>
+                <hr>
+                <p>{{ stock_info.snp }}</p>
+                <hr>
+                <p>{{ stock_info.nasdaq }}</p>
+                <hr>
+                <p>{{ stock_info.russell }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="card">
+              <div class="card-header text-center">
+                <h3 class="card-title" id="twitter" style="text-align:center;"><strong>Twitter Feed</strong></h3>
+                <h5 class="card-category" style="text-align:center;">Extracting Tweets with Hashtags</h5>
+              </div>
+              <div class="card-body text-center">
+                <form action="/scrape">
+                  Number of Tweets:<br>
+                  <input class="mb-3" type="text" name="n" value="">
+                  <br>
+                  Hashtag (Do not Include the Hashtag Sign):<br>
+                  <input type="text" name="search" value="">
+                  <br><br>
+                  <input type="submit" value="Submit">
+                </form>
+                <div>
+                  <h3 class="card-title mt-3" style="text-align:center;">Latest Tweets:</h3>
+                  {% for row in data %}
+                  <p> {{row}} </p>
+                  {% endfor %}
                 </div>
               </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-              <div class="card">
-                <div class="card-header">
-                  <h5 class="card-category">All Persons List</h5>
-                  <h4 class="card-title"> Employees Stats</h4>
-                </div>
-                <div class="card-body">
-                </div>
+          </div>
+          <div class="col-lg-4 col-md-12 d-flex align-items-stretch">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title" style="text-align:center;"><strong>US GDP Change (Q1:2016 - Q1:2019)</strong>
+                </h5>
+                <h5 class="card-category" style="text-align:center;">(Click on Chart to Learn More)</h5>
               </div>
-            </div>
-            <div class="col-lg-4 col-md-12">
-              <div class="card">
-                <div class="card-header">
-                  <h5 class="card-category">All Persons List</h5>
-                  <h4 class="card-title"> Employees Stats</h4>
-                </div>
-                <div class="card-body">
-                </div>
+              <div class="card-body">
+                <script type="text/javascript" src="../assets/js/nunoo.js"></script>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!--   Core JS Files   -->
-    <script src="../assets/js/core/jquery.min.js"></script>
-    <script src="../assets/js/core/popper.min.js"></script>
-    <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-    <!-- Chart JS -->
-    <script src="../assets/js/plugins/chartjs.min.js"></script>
-    <!--  Notifications Plugin    -->
-    <script src="../assets/js/plugins/bootstrap-notify.js"></script>
-    <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="../assets/js/now-ui-dashboard.min.js?v=1.3.0" type="text/javascript"></script>
-    <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-    <!--script src="../assets/demo/demo.js"></script>-->
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+  <!--   Core JS Files   -->
+  <script src="../assets/js/core/jquery.min.js"></script>
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Chart JS -->
+  <script src="../assets/js/plugins/chartjs.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/now-ui-dashboard.min.js?v=1.3.0" type="text/javascript"></script>
+  <!-- d3 JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
 
-    <!-- Map does not work with version 5. Poverty vs education does not work with version 4. -->
-    <!--script src="https://d3js.org/d3.v4.min.js"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
+  <!--Sandbox JS used for interactive chart-->
+  <script src="../assets/js/sandbox-dashboard.js"></script>
+  <!--Maria Contents-->
+  <!-- API key -->
+  <script type="text/javascript" src="../assets/js/leafletmap/config.js"></script>
+  <!-- JS  -->
+  <script type="text/javascript" src="../assets/js/leafletmap/logic.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script>
-    <!--Sandbox JS used for interactive chart-->
-    <script src="../assets/js/sandbox-dashboard.js"></script>
-    <!--Maria Contents-->
-    <!-- API key -->
-    <script type="text/javascript" src="../assets/js/leafletmap/config.js"></script>
-    <!-- JS  -->
-    <script type="text/javascript" src="../assets/js/leafletmap/logic.js"></script>
+  <script>
+    $(document).ready(function () {
+      // Javascript method's body can be found in assets/js/demos.js
+      //demo.initDashboardPageCharts();
 
-    <script>
-      $(document).ready(function () {
-        // Javascript method's body can be found in assets/js/demos.js
-        //demo.initDashboardPageCharts();
-
-      });
-    </script>
+    });
+  </script>
 </body>
 
 </html>
