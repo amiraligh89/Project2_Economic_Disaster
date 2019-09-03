@@ -14,7 +14,7 @@ import time
 # Initialize browser
 def init_browser():
     executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
-    return Browser('chrome', **executable_path, headless=False)
+    return Browser('chrome', **executable_path, headless=True) # if headless=False, the page being scrapped will remain open and on display
 
 # Create a dictionary to store all scraped data
 stock_info = {}
@@ -30,7 +30,7 @@ def scrape_stock():
     # Creating a beautifulsoup object and parsing this object
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
-    browser.quit() #this will close the browser window after scraping
+    #browser.quit() #this will close the browser window after scraping
 
     # Extracting the exchange names, trading volumes, changes
     # tickers = soup.find_all('div', id = "kp-wp-tab-MARKET_SUMMARY")
