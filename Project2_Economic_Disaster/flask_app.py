@@ -14,6 +14,8 @@ print(__name__)
 # Create an instance of our Flask app.
 app = Flask(__name__)
 
+# this should store the previous scrape until the next one
+stock_data = {}
 
 # Set route to query mongoDB and make an HTML template
 @app.route("/")
